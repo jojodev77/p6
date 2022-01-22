@@ -1,7 +1,5 @@
 package com.payMyBuddy.payMyBuddy.entity;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,14 +15,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "user_role")
-public class User_role {
+@Table(name = "user_partner_account")
+public class User_partner_account {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	long user_role_id;
+	long user_partner_account_id;
 	
 	@OneToOne
-	User_personnal_connexion user_personnal_connexion;
-	
-	String role_attribute;
+	User_account_informations ser_account_informations;
 }

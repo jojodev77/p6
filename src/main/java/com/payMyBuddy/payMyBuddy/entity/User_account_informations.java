@@ -17,15 +17,28 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "user")
-public class User {
+@Table(name = "user_account_informations")
+public class User_account_informations {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	long id;
-
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	User_personnal_informations user_personnal_informations;
-
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	User_account_informations user_account_informations;
+	long user_account_informations_id;
+	
+	@OneToOne
+	User user;
+	
+	String account_reference_transaction;
+	
+	int number_account;
+	
+	double sold_account;
+	
+	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	User_partner_account user_partner_account;
+	
+	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	History_transaction history_transaction;
+	
+	boolean state;
+	
+	
 }

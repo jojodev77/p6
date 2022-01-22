@@ -1,6 +1,6 @@
 package com.payMyBuddy.payMyBuddy.entity;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,14 +17,16 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "user_role")
-public class User_role {
+@Table(name = "history_transaction")
+public class History_transaction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	long user_role_id;
-	
+	long history_transaction_id;
+
 	@OneToOne
-	User_personnal_connexion user_personnal_connexion;
-	
-	String role_attribute;
+	User_account_informations user_account_informations;
+
+	LocalDateTime date;
+
+	String account_reference_transaction;
 }
