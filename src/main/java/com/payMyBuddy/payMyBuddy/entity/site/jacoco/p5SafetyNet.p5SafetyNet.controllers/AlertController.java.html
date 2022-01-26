@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AlertController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">p5SafetyNet</a> &gt; <a href="index.source.html" class="el_package">p5SafetyNet.p5SafetyNet.controllers</a> &gt; <span class="el_source">AlertController.java</span></div><h1>AlertController.java</h1><pre class="source lang-java linenums">package p5SafetyNet.p5SafetyNet.controllers;
+
+import java.util.HashSet;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import p5SafetyNet.p5SafetyNet.dto.ChildPersons;
+import p5SafetyNet.p5SafetyNet.dto.CoveragePersonsOfStation;
+import p5SafetyNet.p5SafetyNet.dto.FireAddress;
+import p5SafetyNet.p5SafetyNet.dto.FloodStationsInformations;
+import p5SafetyNet.p5SafetyNet.dto.PersonsInfos;
+import p5SafetyNet.p5SafetyNet.services.AlertService;
+import p5SafetyNet.p5SafetyNet.services.ReadFileJson;
+
+@RestController
+@RequestMapping
+<span class="fc" id="L22">public class AlertController {</span>
+	
+	@Autowired
+	ReadFileJson readFileJson;
+	
+	@Autowired
+	AlertService alertService;
+	
+	@PostMapping(&quot;/firestation&quot;)
+	public CoveragePersonsOfStation  coveragePersonsOfStation(@RequestParam int stationNumber )  {
+<span class="fc" id="L32">		return alertService.getPersonsByCoverageFireStation(stationNumber);</span>
+	}	
+	@PostMapping(&quot;/childAlert&quot;)
+	public HashSet&lt;ChildPersons&gt;  childAdress(@RequestParam String address ) {
+<span class="fc" id="L36">		return alertService.getChildByAdress(address);</span>
+	}
+	
+	@PostMapping(&quot;/phoneAlert&quot;)
+	public List&lt;String&gt;  childAdress(@RequestParam int firestation )  {
+<span class="fc" id="L41">		return alertService.getPhoneNumberPersonsByStation(firestation);</span>
+	}
+	
+	@PostMapping(&quot;/fire&quot;)
+	public List&lt;FireAddress&gt;  getFireAdress(@RequestParam String address )  {
+<span class="fc" id="L46">		return alertService.getFireAdress(address);</span>
+	}
+	
+	@PostMapping(&quot;/personInfo&quot;)
+	public List&lt;PersonsInfos&gt;  getPersonsInformations(@RequestParam String lastName, @RequestParam String firstName )  {
+<span class="fc" id="L51">		return alertService.getPersonsInformations(lastName, firstName);</span>
+	}
+	
+	@PostMapping(&quot;/communityEmail&quot;)
+	public List&lt;String&gt;  getEmailByCity(@RequestParam String city )  {
+<span class="fc" id="L56">		return alertService.getEmailByCity(city);</span>
+	}
+	
+	@PostMapping(&quot;/flood/stations&quot;)
+	public List&lt;FloodStationsInformations&gt;  getAdressByListStations(@RequestParam int[] stations )  {
+<span class="fc" id="L61">		return alertService.getListAdressByStation(stations);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

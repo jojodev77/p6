@@ -1,25 +1,35 @@
 package com.payMyBuddy.payMyBuddy.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@DiscriminatorColumn(name = "type")
+@Table(name = "user_personnal_connexion", 
+uniqueConstraints = { 
+		@UniqueConstraint(columnNames = "email") 
+	})
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "user_personnal_connexion")
 public class User_personnal_connexion {
 
 	@Id
@@ -33,9 +43,11 @@ public class User_personnal_connexion {
 	
 	String password;
 	
-	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	User_role user_role;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(	name = "user_connexion_role", 
+	joinColumns = @JoinColumn(name = "user_personnal_connexion_id"), 
+	inverseJoinColumns = @JoinColumn(name = "user_role_id"))
+	List<User_role> user_role= new ArrayList<>();
 	
-	List<String> social_network;
 	
 }

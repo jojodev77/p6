@@ -22,5 +22,5 @@ public class User_partner_account {
 	long user_partner_account_id;
 	
 	@OneToOne
-	User_account_informations ser_account_informations;
+	User_account_informations user_account_informations;
 }
