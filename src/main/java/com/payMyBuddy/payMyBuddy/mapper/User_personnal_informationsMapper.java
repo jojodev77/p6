@@ -13,7 +13,7 @@ import com.payMyBuddy.payMyBuddy.entity.User_personnal_informations;
 @Mapper(uses = {User_personnal_informationsMapper.class,UserPersonnalConnexionMapper.class, User_addressMapper.class} , componentModel = "spring" )
 public interface User_personnal_informationsMapper {
 	
-//	User_personnal_informationsMapper INSTANCE = Mappers.getMapper( User_personnal_informationsMapper.class );
+	User_personnal_informationsMapper INSTANCE = Mappers.getMapper( User_personnal_informationsMapper.class );
 User_personnal_informations_DTO toUserPersonnalInformationDTO(User_personnal_informations userPersonnalInformations);
 User_personnal_informations  toUserPersonnalInformations(User_personnal_informations_DTO userPersonnalInformationsDTO);
 }

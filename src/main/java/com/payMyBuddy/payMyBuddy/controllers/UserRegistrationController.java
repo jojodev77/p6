@@ -14,20 +14,21 @@ import com.payMyBuddy.payMyBuddy.dto.User_personnal_informations_DTO;
 import com.payMyBuddy.payMyBuddy.services.UserRegistrationService;
 
 @RestController
+@RequestMapping
 public class UserRegistrationController {
 	
 
 	@Autowired
 	UserRegistrationService userRegistrationService;
 	
-	  @RolesAllowed("CLIENT")
-	   @RequestMapping("/**")
-	   public String getUser()
-	   {
-	      return "Welcome User";
-	   }
+//	  @RolesAllowed("CLIENT")
+//	   @RequestMapping("/**")
+//	   public String getUser()
+//	   {
+//	      return "Welcome User";
+//	   }
 	  
-	  @PostMapping("/test")
+	  @PostMapping("/signin")
 	  public JwtResponse getUsertest(@RequestBody JwtRequest jwt){
 	      return userRegistrationService.signIn(jwt);
 	   }

@@ -50,9 +50,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.cors().and().csrf().disable()
 		.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-		.authorizeRequests().antMatchers("/api/v1/users/signin/**","/openapi/**"
-				,"/api/v1/tablets/associate/**").permitAll()
-		.antMatchers(HttpMethod.POST,"/api/v1/history/**", "/signup/**").permitAll()
+		.authorizeRequests().antMatchers("/signup/**","/openapi/**"
+				,"/signin/**").permitAll()
+		.antMatchers(HttpMethod.POST,"/signin/**", "/signup/**").permitAll()
 		.anyRequest().authenticated();
 
 		

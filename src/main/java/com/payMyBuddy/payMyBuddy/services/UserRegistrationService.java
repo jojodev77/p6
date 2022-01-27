@@ -129,7 +129,8 @@ public class UserRegistrationService {
 //			if (isValid(user_personnal_informations.getUser_personnal_connexion().getPassword())) {
 //				
 		user.setUser_personnal_informations(user_personnal_informations);
-	    user.setUser_account_informations(user_account_informationsMapper.toUser_account_informationsEntity(userAccountRegistrationService.userRegistrationAccount(user_personnal_informations)));
+	    user.setUser_account_informations(userAccountRegistrationService.attributeAccountInformations(user_personnal_informations));
+	    user.getUser_account_informations().setUser(user);
 				userRepository.save(user);
 //			} else {
 //				throw new RuntimeException("password format is not valid ");
@@ -158,7 +159,7 @@ public class UserRegistrationService {
 	public JwtResponse signIn(JwtRequest loginRequest) {
 
 		Authentication authentication = authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(loginRequest.getEmaill(), loginRequest.getPssword()));
+				new UsernamePasswordAuthenticationToken(loginRequest.getEmaill(), loginRequest.getPassword()));
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtUtils.generateJwtToken(authentication);
@@ -168,6 +169,7 @@ public class UserRegistrationService {
 				.map(item -> item.getAuthority())
 				.collect(Collectors.toList());
 
+		System.out.println("::::::::::::::::::::::::::" + new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(),userDetails.getEmail()) );
 		return new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(),userDetails.getEmail());
 	}
 	

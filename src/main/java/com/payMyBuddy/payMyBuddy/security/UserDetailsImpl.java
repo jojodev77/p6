@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.payMyBuddy.payMyBuddy.entity.User_personnal_connexion;
 import com.payMyBuddy.payMyBuddy.entity.User_personnal_informations;
 
 
@@ -37,16 +38,16 @@ public class UserDetailsImpl implements UserDetails {
 		this.authorities = authorities;
 	}
 
-	public static UserDetailsImpl build(User_personnal_informations user) {
-		List<GrantedAuthority> authorities = user.getUser_personnal_connexion().getUser_role().stream()
+	public static UserDetailsImpl build(User_personnal_connexion user) {
+		List<GrantedAuthority> authorities = user.getUser_role().stream()
 				.map(role -> new SimpleGrantedAuthority(role.getName().name()))
 				.collect(Collectors.toList());
 
 		return new UserDetailsImpl(
 				user.getId(), 
-				user.getLastName(), 
-				user.getUser_personnal_connexion().getEmail(),
-				user.getUser_personnal_connexion().getPassword(), 
+				user.getUser_role().toString(), 
+				user.getEmail(),
+				user.getPassword(), 
 				authorities);
 	}
 
@@ -102,4 +103,6 @@ public class UserDetailsImpl implements UserDetails {
 		UserDetailsImpl user = (UserDetailsImpl) o;
 		return Objects.equals(id, user.id);
 	}
+
+
 }

@@ -17,7 +17,7 @@ import io.jsonwebtoken.*;
 public class JwtUtils {
 	private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-	@Value("jwtGrokonezSecretKey")
+	@Value("payMyBuddyTokenSecret")
 	private String jwtSecret;
 
 	@Value("360000")
@@ -28,7 +28,7 @@ public class JwtUtils {
 		UserDetailsImpl  userPrincipal = (UserDetailsImpl ) authentication.getPrincipal();
 
 		return Jwts.builder()
-				.setSubject((userPrincipal.getUsername()))
+				.setSubject((userPrincipal.getEmail()))
 				.setIssuedAt(new Date())
 				.setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
 				.signWith(SignatureAlgorithm.HS512, jwtSecret)

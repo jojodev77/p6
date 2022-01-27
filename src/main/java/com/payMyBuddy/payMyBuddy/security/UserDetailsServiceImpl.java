@@ -24,11 +24,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Override
 	@Transactional
-	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-		User_personnal_connexion userConnexion = userConnexionRepository.findByEmail(userName);
-		User_personnal_informations user = userRepository.findByUserPersonnalConnexionById(userConnexion);
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		User_personnal_connexion userConnexion = userConnexionRepository.findByEmail(email);
 
-		return UserDetailsImpl.build(user);
+		return UserDetailsImpl.build(userConnexion);
 	}
 
 }
