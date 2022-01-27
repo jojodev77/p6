@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 public class User_account_informations {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	long user_account_informations_id;
+	long id;
 	
 	@OneToOne
 	User user;

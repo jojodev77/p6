@@ -14,4 +14,9 @@ public interface User_roleRepository extends JpaRepository<User_role, Long> {
 		return null;
 	}
 
+	static Optional<User_role> findByName(User_role r) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

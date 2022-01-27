@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 public class History_transaction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	long history_transaction_id;
+	long id;
 
 	@OneToOne
 	User_account_informations user_account_informations;

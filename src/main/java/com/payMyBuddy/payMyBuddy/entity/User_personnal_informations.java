@@ -6,6 +6,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -22,7 +24,7 @@ import lombok.NoArgsConstructor;
 public class User_personnal_informations {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	long user_personnal_informations_id;
+	long id;
 	
 	@OneToOne
 	User user;

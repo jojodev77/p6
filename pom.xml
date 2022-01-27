@@ -46,6 +46,7 @@
 		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct-processor</artifactId>
+			<version>1.4.1.Final</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -87,28 +88,27 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<annotationProcessorPaths>
+						<groupId>org.mapstruct</groupId>
+						<artifactId>mapstruct-processor</artifactId>
+						<version>${mapstruct.version}</version>
+					</annotationProcessorPaths>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
-					<annotationProcessorPaths>
-						<groupId>org.mapstruct</groupId>
-						<artifactId>mapstruct-processor</artifactId>
-						<version>${mapstruct.version}</version>
-					</annotationProcessorPaths>
+					<compilerArgs>
+						<compilerArg>
+                       -Amapstruct.defaultComponentModel=spring
+                </compilerArg>
+					</compilerArgs>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
 	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.mapstruct</groupId>
-				<artifactId>mapstruct-processor</artifactId>
-				<version>1.4.0.Final</version>
-			</dependency>
-		</dependencies>
+		<dependencies></dependencies>
 	</dependencyManagement>
 </project>

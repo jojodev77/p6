@@ -1,5 +1,7 @@
 package com.payMyBuddy.payMyBuddy.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -11,5 +13,7 @@ public interface User_personnal_informationsRepository extends JpaRepository<Use
 
 	@Query("select u from User_personnal_informations u WHERE u.user_personnal_connexion = :upc ")
 	User_personnal_informations findByUserPersonnalConnexionById(@Param("upc") User_personnal_connexion upc);
+
+	void save(Optional<User_personnal_connexion> userInformations);
 
 }

@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 public class User_partner_account {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	long user_partner_account_id;
+	long id;
 	
 	@OneToOne
 	User_account_informations user_account_informations;

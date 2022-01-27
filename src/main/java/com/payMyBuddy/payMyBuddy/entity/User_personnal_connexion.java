@@ -17,6 +17,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.payMyBuddy.payMyBuddy.dto.User_personnal_connexion_DTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,7 +36,7 @@ public class User_personnal_connexion {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	long user_personnal_connexion_id;
+	long id;
 	
 	@OneToOne
 	User_personnal_informations user_personnal_informations;
@@ -44,10 +46,9 @@ public class User_personnal_connexion {
 	String password;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(	name = "user_connexion_role", 
-	joinColumns = @JoinColumn(name = "user_personnal_connexion_id"), 
-	inverseJoinColumns = @JoinColumn(name = "user_role_id"))
 	List<User_role> user_role= new ArrayList<>();
+
+
 	
 	
 }
