@@ -1,8 +1,11 @@
 package com.payMyBuddy.payMyBuddy.controllers;
 
+import java.security.Principal;
+
 import javax.annotation.security.RolesAllowed;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,4 +40,9 @@ public class UserRegistrationController {
 	  public String signup(@RequestBody User_personnal_informations_DTO user_personnal_informations) {
 		  return userRegistrationService.createUser(user_personnal_informations);
 	  }
+	  
+	  @GetMapping("/login/oauth2/signinByGoogle")
+	  public Principal signinByGoogle(Principal principal) {
+	        return principal;
+	    }
 }

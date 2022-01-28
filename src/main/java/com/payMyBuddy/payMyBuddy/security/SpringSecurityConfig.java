@@ -15,7 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
 import com.payMyBuddy.payMyBuddy.security.AuthEntryPointJwt;
 import com.payMyBuddy.payMyBuddy.security.AuthTokenFilter;
 
@@ -26,7 +25,7 @@ import com.payMyBuddy.payMyBuddy.security.AuthTokenFilter;
 		// jsr250Enabled = true,
 		prePostEnabled = true)
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
-	
+
 	@Autowired
 	private AuthEntryPointJwt unauthorizedHandler;
 
@@ -35,45 +34,41 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new AuthTokenFilter();
 	}
 
+//	@Override
+//	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//		auth.inMemoryAuthentication()
+//			.withUser("springuser").password(passwordEncoder().encode("spring123"))
+//			.roles("CLIENT")
+//			.and()
+//			.withUser("springadmin").password(passwordEncoder().encode("admin123"))
+//			.roles("CLIENT", "BANK");
+//	}
+
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
-			.withUser("springuser").password(passwordEncoder().encode("spring123"))
-			.roles("CLIENT")
-			.and()
-			.withUser("springadmin").password(passwordEncoder().encode("admin123"))
-			.roles("CLIENT", "BANK");
-	}
-	
-	@Override 
 	public void configure(HttpSecurity http) throws Exception {
-		http.cors().and().csrf().disable()
-		.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-		.authorizeRequests().antMatchers("/signup/**","/openapi/**"
-				,"/signin/**").permitAll()
-		.antMatchers(HttpMethod.POST,"/signin/**", "/signup/**").permitAll()
-		.anyRequest().authenticated();
+//		http.cors().and().csrf().disable()
+//		.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+//		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+//		.authorizeRequests().antMatchers("/signup/**","/openapi/**"
+//				,"/signin/**").permitAll()
+//		.antMatchers(HttpMethod.POST,"/signin/**", "/signup/**").permitAll()
+//		.anyRequest().authenticated();
+//
+//		
+//
+//	http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+		http.cors().and().csrf().disable().authorizeRequests().antMatchers("/signup/**", "/openapi/**", "/signin/**")
+				.permitAll().antMatchers(HttpMethod.POST, "/signin/**", "/signup/**")
+				.permitAll().anyRequest().authenticated()
+				.and().oauth2Login();
 
-		
-
-	http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-//		http.cors().and().csrf().disable().authorizeRequests()
-//			.antMatchers("/test").anonymous()
-//			.antMatchers("/user").hasRole("BANK")
-//			.anyRequest().authenticated()
-//			.and()
-//			.formLogin()
-//			.and()
-//			.oauth2Login();
-		
 	}
-	
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
+
 	@Bean
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
