@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -22,28 +21,24 @@ import org.springframework.stereotype.Service;
 
 import com.payMyBuddy.payMyBuddy.dto.JwtRequest;
 import com.payMyBuddy.payMyBuddy.dto.JwtResponse;
-import com.payMyBuddy.payMyBuddy.dto.UserRoleDto;
-import com.payMyBuddy.payMyBuddy.dto.User_personnal_connexion_DTO;
 import com.payMyBuddy.payMyBuddy.dto.User_personnal_informations_DTO;
 import com.payMyBuddy.payMyBuddy.entity.User;
 import com.payMyBuddy.payMyBuddy.entity.User_address;
 import com.payMyBuddy.payMyBuddy.entity.User_personnal_connexion;
 import com.payMyBuddy.payMyBuddy.entity.User_personnal_informations;
 import com.payMyBuddy.payMyBuddy.entity.User_role;
-import com.payMyBuddy.payMyBuddy.mapper.UserPersonnalConnexionMapper;
 import com.payMyBuddy.payMyBuddy.mapper.User_account_informationsMapper;
-import com.payMyBuddy.payMyBuddy.mapper.User_addressMapper;
-import com.payMyBuddy.payMyBuddy.mapper.User_personnal_informationsMapper;
 import com.payMyBuddy.payMyBuddy.repository.UserRepository;
 import com.payMyBuddy.payMyBuddy.repository.User_personnal_connexionRepository;
 import com.payMyBuddy.payMyBuddy.repository.User_personnal_informationsRepository;
 import com.payMyBuddy.payMyBuddy.repository.User_roleRepository;
-import com.payMyBuddy.payMyBuddy.security.AuthTokenFilter;
 import com.payMyBuddy.payMyBuddy.security.JwtUtils;
 import com.payMyBuddy.payMyBuddy.security.UserDetailsImpl;
 
 @Service
 public class UserRegistrationService {
+	
+
 	@Autowired
 	PasswordEncoder encoder;
 
@@ -159,6 +154,9 @@ public class UserRegistrationService {
 	public String signinByGoogle(Principal user){ 
 		   return "Welcome, " + user.getName(); 
 		   }
+	
+
+	
 
 	private List<User_role> getRoleList(User_personnal_connexion userDto) {
 		List<User_role> roles = new ArrayList<>();
