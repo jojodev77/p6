@@ -29,49 +29,18 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new AuthTokenFilter();
 	}
 
-//	@Override
-//	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//		auth.inMemoryAuthentication()
-//			.withUser("springuser").password(passwordEncoder().encode("spring123"))
-//			.roles("CLIENT")
-//			.and()
-//			.withUser("springadmin").password(passwordEncoder().encode("admin123"))
-//			.roles("CLIENT", "BANK");
-//	}
-
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-//		http.cors().and().csrf().disable()
-//		.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-//		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-//		.authorizeRequests().antMatchers("/signup/**","/openapi/**"
-//				,"/signin/**").permitAll()
-//		.antMatchers(HttpMethod.POST,"/signin/**", "/signup/**").permitAll()
-//		.anyRequest().authenticated();
-//
-//		
-//
-//	http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 		http.cors().and().csrf().disable()
 	      .authorizeRequests().antMatchers("/signup/**", "/login/oauth2/code/google/**", "/signin/**" ,"/signinByGoogle/**")
 				.permitAll().antMatchers(HttpMethod.POST, "/signin/**", "/signup/**")
 				.permitAll().antMatchers(HttpMethod.GET, "/signin/**", "/login/oauth2/code/google/**")
-				.permitAll().anyRequest().authenticated()
-		.and()
-        .oauth2Login()
-            //.loginPage("http://localhost:4200/home")
-            .userInfoEndpoint()
-                .userService(oauthUserService);
+				.permitAll().anyRequest().authenticated().and()
+				.httpBasic().and()
+        .oauth2Login();
+           
 }
  
-@Autowired
-private CustomOAuth2UserService oauthUserService;
-	
-	
-	
-	
-
-
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();

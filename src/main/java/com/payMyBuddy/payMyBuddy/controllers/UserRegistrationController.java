@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -63,20 +64,10 @@ public class UserRegistrationController {
 		return user;
 	}
 	
-	@GetMapping("/signinByGoogle")
-	public String signinByG(Principal user) {
-		Principal p = signinByGoogle(user);
-		
-		return p.getName();
+	@PostMapping("/login/oauth2/code/google")
+	public Principal prr(Principal user_personnal_informations) {
+		return user_personnal_informations;
 	}
-
-//	  @GetMapping("/login/oauth2/signinByGoogle")
-//	  public OidcIdToken  signinByGoogle(OAuth2User  user) {
-//	   if(user instanceof DefaultOidcUser) {
-//		     DefaultOidcUser oidcUser = (DefaultOidcUser)user;
-//		     return oidcUser.getIdToken();
-//		   }
-//		   return null;
-//		}
+	
 
 }

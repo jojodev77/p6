@@ -17,6 +17,4 @@ public class UserAccountRegistrationService {
 		user_account_informations.setAccount_reference_transaction(account_reference_transaction);
 		return user_account_informations;
 	}
-	
-	
  }
